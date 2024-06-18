@@ -1,4 +1,4 @@
-# POWERFLEX BACKEND REST API
+# Power Flex Backend REST API
 
 This project was bootstrapped with:
 * [Node](https://nodejs.org/en)
