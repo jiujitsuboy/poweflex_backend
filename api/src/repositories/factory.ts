@@ -92,7 +92,6 @@ class FactoryRepository {
     }
 
     addFactory = async (factory: Factory) => {
-        console.log("factory repo: ", factory.name)
         return this.db.factory.create({
             data: {
                 name: factory.name

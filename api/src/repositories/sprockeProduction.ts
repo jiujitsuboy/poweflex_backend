@@ -91,23 +91,19 @@ class SpRocketProductionRepository {
         return spRocketsProduction
     }
 
-    getSpRocketProductionByFactory = async (factoryName: string, pageNum: number, pageSize: number) => {
+    getSpRocketProductionByFactory = async (factoryId: number, pageNum: number, pageSize: number) => {
         let spRocketsProduction: SpRocketProductionsPaginated | null = null
         try {
             const totalRows = await this.db.sprocket_production.count({
                 where: {
-                    factory: {
-                        name: factoryName
-                    }
+                    factory_id:factoryId
                 }
             })
             const spRocketsProductionDb = await this.db.sprocket_production.findMany({
                 skip: pageNum * pageSize,
                 take: pageSize,
                 where: {
-                    factory: {
-                        name: factoryName
-                    }
+                    factory_id:factoryId
                 },
                 include: {
                     factory: {
@@ -118,14 +114,6 @@ class SpRocketProductionRepository {
                     sprocket: true
                 }
             })
-
-            // if (spRocketsProductionDb && spRocketsProductionDb.length > 0) {
-            //     for (const spRocketProduction of spRocketsProductionDb) {
-            //         spRocketProduction.factory_id = spRocketProduction.factory.id
-            //         spRocketProduction.sprocket_id = spRocketProduction.sprocket_id
-
-            //     }
-            // }
 
             spRocketsProduction = {
                 factories: spRocketsProductionDb,

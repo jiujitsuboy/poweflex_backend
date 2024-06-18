@@ -6,7 +6,7 @@ const routerSpRocketProduction = express.Router()
 
 routerSpRocketProduction.get('/sprocketproduction/:id', authMiddleware, getSpRocketProductionController)
 routerSpRocketProduction.get('/sprocketsproduction', authMiddleware, getSpRocketsProductionController)
-routerSpRocketProduction.get('/sprocketsproduction/:name', authMiddleware, getSpRocketProductionByFactoryController)
+routerSpRocketProduction.get('/sprocketsproduction/:id', authMiddleware, getSpRocketProductionByFactoryController)
 routerSpRocketProduction.post('/sprocketproduction', authMiddleware, addSpRocketProductionController)
 routerSpRocketProduction.put('/sprocketproduction', authMiddleware, updateSpRocketProductionController)
 routerSpRocketProduction.delete('/sprocketproduction/:id', authMiddleware, deleteSpRocketProductionController)

@@ -28,8 +28,8 @@ const getSpRocketProductionByAttributes = (factoryId: number, spRocketId: number
     return spRocketProductionRepository.getSpRocketProductionByAttributes(factoryId, spRocketId, time)
 }
 
-const getSpRocketProductionByFactory = async (factoryName: string, pageNum: number, pageSize: number) => {
-    const spRocketsProduction = await spRocketProductionRepository.getSpRocketProductionByFactory(factoryName, pageNum, pageSize)
+const getSpRocketProductionByFactory = async (factoryId: number, pageNum: number, pageSize: number) => {
+    const spRocketsProduction = await spRocketProductionRepository.getSpRocketProductionByFactory(factoryId, pageNum, pageSize)
     return formatSpRocketProductions(spRocketsProduction.factories)
 }
 

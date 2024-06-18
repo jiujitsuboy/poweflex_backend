@@ -50,8 +50,6 @@ const addFactoryController = async (req: Request, res: Response, next: NextFunct
     try {
         const name: string = req.body.name
 
-        console.log("name: ", name.length, name.length === 0)
-
         if (name.length === 0) {
             throw new Error("name must be a non empty string.")
         }

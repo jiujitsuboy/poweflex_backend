@@ -27,12 +27,12 @@ const getSpRocketProductionById = async (id: string) => {
 
 const getSpRocketProductionByFactoryController = async (req: Request, res: Response, next: NextFunction) => {
     try {
-        const name = req.params.name
+        const id = req.params.id
         const page = req.query.page || 0
         const size = req.query.size || PAGE_SIZE
 
-        if(!name){
-            throw new Error("name must be not blank.")
+        if (!isNumber(id)) {
+            throw new Error("id must be a positive number.")
         }
 
         if (typeof page === 'string' && !isNumber(page)) {
@@ -43,7 +43,7 @@ const getSpRocketProductionByFactoryController = async (req: Request, res: Respo
             throw new Error("size must be a positive number.")
         }
 
-        const sprocketsResp = await getSpRocketProductionByFactory(name.toString(), +page, +size)
+        const sprocketsResp = await getSpRocketProductionByFactory(+id, +page, +size)
         res.json(sprocketsResp)
     }
     catch (error) {

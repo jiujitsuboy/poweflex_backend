@@ -60,7 +60,7 @@ describe("with SpRocketProduction", () => {
         await expect(getSpRocketProduction(id)).rejects.toThrow(`sprocketProduction with ${id} does not exist.`);
 
     })
-    it("get SpRocketProduction by factory name", async () => {
+    it("get SpRocketProduction by factory id", async () => {
         //given
 
         const factoryProduction = spRocketsProduction.filter((_, index) => index === spRocketsProduction.length - 1)
@@ -69,7 +69,7 @@ describe("with SpRocketProduction", () => {
         prismaMock.sprocket_production.findMany.mockResolvedValue(factoryProduction)
 
         //when
-        const spRocketProductionResp = await getSpRocketProductionByFactory(spRocketProductionElement.factory!.name, 0, 10)
+        const spRocketProductionResp = await getSpRocketProductionByFactory(spRocketProductionElement.factory_id, 0, 10)
 
         //then
         expect(spRocketProductionResp).toBeTruthy()
@@ -78,7 +78,7 @@ describe("with SpRocketProduction", () => {
         expect(spRocketProductionResp?.factories[0].factory.spRocketId).toBe(spRocketProductionElement.sprocket?.id)
 
     })
-    it("fail to get spRocketProduction by factory name", async () => {
+    it("fail to get spRocketProduction by factory id", async () => {
         //given
         prismaMock.sprocket_production.count.mockImplementation(() => {
             throw new Error("database connection rejected");
@@ -87,7 +87,7 @@ describe("with SpRocketProduction", () => {
         const spRocketProductionElement = factoryProduction[0]
 
         //when
-        await expect(getSpRocketProductionByFactory(spRocketProductionElement.factory!.name, 0, 10)).rejects.toThrow('database connection rejected');
+        await expect(getSpRocketProductionByFactory(spRocketProductionElement.factory_id, 0, 10)).rejects.toThrow('database connection rejected');
 
     })
     it("create new spRocketProduction", async () => {
