@@ -218,6 +218,11 @@ Use the following command:
 ```
     docker-compose down
 ```
+## API Security
+
+To not implement a signup/signin module, we decide to use an API Token to have a dummy authentication mechanism. This is just for the purpose of adding a dummy layer of security to depict how to handle validation of any of the request.
+
+For this purpose, every route has a middleware that is execute before the feature called, to guarantee that the request is from a legitime user.
 
 ## Testing Coverage
 
