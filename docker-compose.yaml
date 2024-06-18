@@ -30,5 +30,6 @@ services:
       DATABASE_URL: sqlserver://mssql:1433;database=powerflex;user=sa;password=SqlS3rv3r24;encrypt=false;trustServerCertificate=true
     ports:
       - 5000:5000
+    restart: on-failure
     depends_on:
       - mssql
