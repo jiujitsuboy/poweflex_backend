@@ -12,6 +12,21 @@ This project was bootstrapped with:
 
 ## API Design
 
+The REST API has the following layers:
+
+1. Routes: Define the path pattern for every capability.
+
+![image](screenshots/routes.png)
+2. Middleware: Intermediary middleware who validate the presence of the API Token, for allow the request to be executed.
+
+![image](screenshots/middleware.png)
+
+3. Controllers: Entrypoint to the API, this layer receive the parameters of the request and validate, required parameters presence and types. 
+
+4. Services: Handles all the business logic and relays on the repository layer for persisting the state.
+
+5. Repository: Use Prisma as ORM to connect with the data base.
+
 This REST API, offer capabilities for:
 
 1. CRUD Factories
@@ -138,7 +153,18 @@ This REST API, offer capabilities for:
             curl --location 'http://localhost:5000/sprocketsproduction?page=0&size=10' \
                 --header 'Authorization: APIToken aeb46ef25b573cd2'
         ```
+        
+    * Get By Factory
+    
         ```
+            curl --location 'http://localhost:5000/sprocketsproduction/fab1234890?page=0&size=10' \
+                --header 'Authorization: APIToken aeb46ef25b573cd2'
+        ``` 
+To test this endpoint, you can use the [Postman Collection](/api/postman/PowerFlex.postman_collection.json)
+
+All the response from the REST API use the json format.
+
+```
         {
             "factories": [
                 {
@@ -187,13 +213,6 @@ This REST API, offer capabilities for:
             ]
         }
         ```
-    * Get By Factory
-    
-        ```
-            curl --location 'http://localhost:5000/sprocketsproduction/fab1234890?page=0&size=10' \
-                --header 'Authorization: APIToken aeb46ef25b573cd2'
-        ``` 
-To test this endpoint, you can use the [Postman Collection](/api/postman/PowerFlex.postman_collection.json)
 
 ## Run the REST API
 
