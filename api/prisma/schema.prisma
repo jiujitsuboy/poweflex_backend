@@ -1,0 +1,36 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model factory {
+  id                  Int                   @id(map: "factory_pk") @default(autoincrement())
+  name                String                @unique(map: "UQ__factory__72E12F1B59FCADD4") @db.VarChar(100)
+  created_at          DateTime              @default(now(), map: "DF__factory__created__3B75D760") @db.DateTime
+  updated_at          DateTime              @default(now(), map: "DF__factory__updated__3C69FB99") @db.DateTime
+  sprocket_production sprocket_production[]
+}
+
+model sprocket {
+  id                  Int                   @id(map: "sprocket_pk") @default(autoincrement())
+  teeth               Int
+  pitch_diameter      Int
+  outside_diameter    Int
+  pitch               Int
+  sprocket_production sprocket_production[]
+}
+
+model sprocket_production {
+  id          Int      @id(map: "NewTable_PK") @default(autoincrement())
+  factory_id  Int
+  sprocket_id Int
+  goal        Int
+  actual      Int
+  time        BigInt
+  factory     factory  @relation(fields: [factory_id], references: [id], onUpdate: NoAction, map: "NewTable_factory_FK")
+  sprocket    sprocket @relation(fields: [sprocket_id], references: [id], onUpdate: NoAction, map: "NewTable_sprocket_FK")
+}

@@ -1,0 +1,32 @@
+services:
+
+  mssql:
+    container_name: mssql-db
+    hostname: mssql-db
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      ACCEPT_EULA: 'Y'
+      MSSQL_SA_PASSWORD: 'SqlS3rv3r24'
+      MSSQL_DATA_DIR: /var/opt/mssql/data
+      MSSQL_PID: 'Developer' 
+      MSSQL_TCP_PORT: 1433 
+    ports: 
+      - "1433:1433"
+    volumes:
+      - ./data:/var/opt/mssql/data1
+      - ./log:/var/opt/mssql/log1
+      - ./secrets:/var/opt/mssql/secrets1
+  mssql-tools:
+    image: mcr.microsoft.com/mssql-tools:latest
+    restart: no
+    command: "/opt/mssql-tools/bin/sqlcmd -S mssql-db -l 60 -U sa -P 'SqlS3rv3r24' -d master -i /mssql-init.sql"
+    depends_on:
+      - mssql
+    volumes:
+      - ./mssql-init.sql:/mssql-init.sql
+  api:
+    build: ./api/.
+    environment:
+      DATABASE_URL: sqlserver://localhost:1433;database=powerflex;user=sa;password=SqlS3rv3r24;encrypt=false;trustServerCertificate=true
+    ports:
+      - 5000:5000
