@@ -219,4 +219,11 @@ Use the following command:
     docker-compose down
 ```
 
+## Testing Coverage
+
+This project use Jest as testing framework for unit testing all the service and repository layers.
+
+![image](screenshots/coverage.png)
+
+
 
