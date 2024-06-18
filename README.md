@@ -157,7 +157,7 @@ This REST API, offer capabilities for:
     * Get By Factory
     
         ```
-            curl --location 'http://localhost:5000/sprocketsproduction/fab1234890?page=0&size=10' \
+            curl --location 'http://localhost:5000/sprocketsproduction/2?page=0&size=10' \
                 --header 'Authorization: APIToken aeb46ef25b573cd2'
         ``` 
 To test this endpoint, you can use the [Postman Collection](/api/postman/PowerFlex.postman_collection.json)
@@ -219,6 +219,8 @@ All the response from the REST API use the json format.
 The simplest way to run this API, is using [docker-compose](/docker-compose.yaml). This will spawn the following containers:
 
 * mssql: A Microsoft Sql Server DB which is used to persist all the factory, sprockets and production data.
+
+* mssql-tools: A script that create the DB powerflex on the Sql Server Instance.
 
 * api: This is the Rest API which will be exposed on port 5000.
 

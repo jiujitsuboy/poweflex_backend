@@ -27,6 +27,8 @@ services:
   api:
     build: ./api/.
     environment:
-      DATABASE_URL: sqlserver://localhost:1433;database=powerflex;user=sa;password=SqlS3rv3r24;encrypt=false;trustServerCertificate=true
+      DATABASE_URL: sqlserver://mssql:1433;database=powerflex;user=sa;password=SqlS3rv3r24;encrypt=false;trustServerCertificate=true
     ports:
       - 5000:5000
+    depends_on:
+      - mssql
